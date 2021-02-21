@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ApiController!
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<div class="my-4">
+			<h1>Liste des départements:</h1>
+			<form action="" method="GET">
+				<div class="row">
+					<div class="col-md-10">
+						<select name="region" class="form-control" id="region">
+							<option value="Toutes">Toutes les régions</option>
+							{% for region in regions %}
+								<option value="{{region.code}}" {% if app.request.query.get('region') == region.code %} selected {% endif %}>{{region.nom}}</option>
+							{% endfor %}
+						</select>
+					</div>
+					<div class="col-md-2">
+						<button type="submit" class="btn btn-success">Ok</button>
+					</div>
+				</div>
+			</form>
+		</div>
+		<div class="row">
+			{% for dep in deps %}
+				<div class="col-md-3">
+					<div class="card border-secondary mb-3" style="max-width: 20rem;">
+						<div class="card-header">{{dep.code}}</div>
+						<div class="card-body">
+							<h5 class="card-title">{{dep.nom}}</h5>
+						</div>
+					</div>
+				</div>
+			{% endfor %}
+		</div>
+	</div>
+{% endblock %}
